@@ -51,7 +51,7 @@ def get_picture_by_id(id):
         if picture["id"] == id:
             return jsonify(picture), 200
     
-    return {"message": "Internal server error"}, 404
+    return {"message": "picture not found"}, 404
 
 
 ######################################################################
@@ -59,13 +59,13 @@ def get_picture_by_id(id):
 ######################################################################
 @app.route("/picture", methods=["POST"])
 def create_picture():
-    new_data = request.get_json()
+    new_picture = request.get_json()
     for picture in data:
-        if picture["id"] == new_data['id']:
+        if picture["id"] == new_picture['id']:
             return {"Message": f"picture with id {picture['id']} already present"}, 302
     
-    data.append(new_data)
-    return jsonify(new_data), 201
+    data.append(new_picture)
+    return jsonify(new_picture), 201
 
 ######################################################################
 # UPDATE A PICTURE
